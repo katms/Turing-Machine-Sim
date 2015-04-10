@@ -1,5 +1,10 @@
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
+
 #include <iostream>
+#include <fstream>
 #include <tuple>
+#include <map>
 
 typedef char input;
 typedef std::string state_name;
@@ -8,3 +13,5 @@ typedef std::map<input, transition> state;
 
 
 const input BLANK='\\';
+
+#endif // CONSTANTS_H

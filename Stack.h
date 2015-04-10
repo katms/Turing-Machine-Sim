@@ -9,9 +9,9 @@ class Stack
         void push(const input& next);
         input pop();
         
-        friend std::ostream& operator<<(const Stack& s);
+        friend std::ostream& operator<<(std::ostream& out, const Stack& s);
     private:
-        list<input> stack;
+        std::list<input> stack;
 };
 
 #endif // STACK_H

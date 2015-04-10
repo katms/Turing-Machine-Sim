@@ -1,0 +1,20 @@
+# states
+q0 q1 q2 q3
+# accepting states
+q3
+
+# format: q X p Y D
+# (q,X) => (p,Y,D)
+
+q0 0 q1 X R
+q0 \ q3 \ L
+q0 X q0 X R
+
+q1 0 q1 0 R
+q1 1 q2 X L
+q1 X q1 X R
+
+q2 0 q2 0 L
+q2 1 q2 1 L
+q2 \ q0 \ R
+q2 X q2 X L
