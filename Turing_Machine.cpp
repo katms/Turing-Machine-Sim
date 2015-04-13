@@ -29,14 +29,14 @@ Turing_Machine::Turing_Machine(std::istream& file)
 
 bool Turing_Machine::accepts(const std::string& word)
 {
+    Stack left;
+    Stack right;
+    input head;
+    
     //push word on the right stack in reverse order
-    for(const auto& ch : word)
+    for(auto itr = word.crbegin(); itr!=word.crend(); ++itr)
     {
-        left.push(ch);
-    }
-    for(unsigned i=0; i<word.size(); ++i)
-    {
-        right.push(left.pop());
+        right.push(*itr);
     }
     
     //head reads the first symbol, now at the top of the right stack

@@ -5,7 +5,7 @@ int main(int argc, char* argv[])
 {
     if(2!=argc)
     {
-        std::cout<<"Usage: tmsim "<<std::endl;
+        std::cout<<"Usage: tmsim <file>"<<std::endl;
         return 1;
     }
     std::ifstream file(argv[1]);
@@ -17,6 +17,7 @@ int main(int argc, char* argv[])
     Turing_Machine tm(file);
     file.close();
     std::cout<<(tm.accepts("00011") ? "true" : "false")<<std::endl;
+    std::cout<<(tm.accepts("000111") ? "true" : "false")<<std::endl;
     
     return 0;
 }
