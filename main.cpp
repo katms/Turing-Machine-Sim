@@ -16,8 +16,8 @@ int main(int argc, char* argv[])
     }
     Turing_Machine tm(file);
     file.close();
-    std::cout<<(tm.accepts("00011") ? "true" : "false")<<std::endl;
-    std::cout<<(tm.accepts("000111") ? "true" : "false")<<std::endl;
+    std::cout<<(tm.accepts("aaabb") ? "true" : "false")<<std::endl;
+    std::cout<<(tm.accepts("aaabbb") ? "true" : "false")<<std::endl;
     
     return 0;
 }
