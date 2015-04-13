@@ -9,13 +9,32 @@
 class Stack
 {
     public:
+    	explicit Stack(const bool& reverse);
         void push(const input& next);
         input pop();
         
-        void print_from_bottom(std::ostream& out=std::cout) const;
-        void print_from_top(std::ostream& out=std::cout) const;
+        friend std::ostream& operator<<(std::ostream& out, const Stack& s)
+        {
+        	if(s.PRINT_REVERSED)
+        	{
+			    for(auto iter = s.stack.crbegin(); iter!=s.stack.crend(); ++iter)
+			    {
+			        out<<*iter;
+			    }
+        	}
+        	else
+        	{
+			    for(const auto& item: s.stack)
+			    {
+			        out<<item;
+			    }        		
+        	}
+        	return out;
+        }
+
     private:
         std::list<input> stack;
+        const bool PRINT_REVERSED;
 };
 
 #endif // STACK_H

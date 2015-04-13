@@ -29,8 +29,8 @@ Turing_Machine::Turing_Machine(std::istream& file)
 
 bool Turing_Machine::accepts(const std::string& word)
 {
-    Stack left;
-    Stack right;
+    Stack left(false);
+    Stack right(true);
     input head;
     
     //push word on the right stack in reverse order
@@ -50,11 +50,12 @@ bool Turing_Machine::accepts(const std::string& word)
     while(final_states.find(current)==final_states.end())
     {
         //output status
-        left.print_from_bottom();
+        std::cout<<left<<current<<head<<right<<std::endl;
+/*        left.print_from_bottom();
         std::cout<<current<<head;
         right.print_from_top();
         std::cout<<std::endl;
-        
+ */       
         try
         {
             std::tie(next, write, go_left) = states.at(current).at(head);
@@ -68,16 +69,13 @@ bool Turing_Machine::accepts(const std::string& word)
         
         //transition
         current = next;
-        if(go_left)
-        {
-            right.push(write);
-            head = left.pop();
-        }
-        else
-        {
-            left.push(write);
-            head = right.pop();
-        }
+
+        //determine which direction to go on the tape
+        Stack& push = (go_left) ? right : left;
+        Stack& pop = ((&push)==(&left)) ? right : left;
+
+        push.push(write);
+        head = pop.pop();
     }
     
     return true;

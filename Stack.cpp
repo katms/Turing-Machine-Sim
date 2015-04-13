@@ -1,5 +1,7 @@
 #include "Stack.h"
 
+Stack::Stack(const bool& print_reversed):
+    PRINT_REVERSED(print_reversed) {}
 
 void Stack::push(const input& next)
 {
@@ -24,18 +26,21 @@ input Stack::pop()
     }
 }
 
-void Stack::print_from_bottom(std::ostream& out) const
+/*std::ostream& operator<<(std::ostream& out, const Stack& s)
 {
-    for(const auto& item: stack)
+    if(s.PRINT_REVERSED)
     {
-        out<<item;
+    for(auto iter = s.stack.crbegin(); iter!=s.stack.crend(); ++iter)
+        {
+            out<<*iter;
+        }
     }
-}
-
-void Stack::print_from_top(std::ostream& out) const
-{
-    for(auto iter = stack.crbegin(); iter!=stack.crend(); ++iter)
+    else
     {
-        out<<*iter;
+        for(const auto& item: s.stack)
+        {
+            out<<item;
+        }               
     }
-}
+    return out;
+}*/
