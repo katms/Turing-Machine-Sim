@@ -12,6 +12,7 @@ public:
 private:
     std::map<state_name, state> states;
     std::set<state_name> final_states;
+    state_name start;
     Stack left;
     Stack right;
     input head;

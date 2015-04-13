@@ -15,8 +15,8 @@ int main(int argc, char* argv[])
         return 1;
     }
     Turing_Machine tm(file);
-    //std::cout<<tm.accepts("hello world!")<<std::endl;
-    
+    file.close();
+    tm.accepts("Hello world!");
     
     return 0;
 }

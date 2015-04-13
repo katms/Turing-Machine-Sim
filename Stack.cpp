@@ -3,7 +3,10 @@
 
 void Stack::push(const input& next)
 {
-    stack.push_back(next);
+    if(!(stack.empty() && BLANK==next))
+    {
+        stack.push_back(next);
+    }
 }
 
 

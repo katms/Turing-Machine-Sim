@@ -1,38 +1,18 @@
 #include "Turing_Machine.h"
 
-
 Turing_Machine::Turing_Machine(std::istream& file)
 {
-    //read states
-    state_name next;
-    if(file.peek()=='#') //skip comments
-    {
-        std::getline(file, next);
-    }
+    //read start state
+    file >> start;
+    file.get(); //go to next line
+    
+    //read accepting states
+    std::string final;
     while(file.peek()!='\n')
     {
-        file >> next;
-        std::cout<<next<<' ';
-        states[next];
+        file >> final;
+        final_states.insert(final);
     }
-    std::cout<<std::endl;
-
-    file.get();
-    if(file.peek()=='#')
-    {
-        std::getline(file, next);
-    }
-    
-    //read final states
-    while(file.peek()!='\n')
-    {
-        file >> next;
-        std::cout<<next<<' ';
-        final_states.insert(next);
-    }
-    
-    //read transitions
-    
 }
 
 bool Turing_Machine::accepts(const std::string& word)
@@ -42,7 +22,7 @@ bool Turing_Machine::accepts(const std::string& word)
     {
         left.push(ch);
     }
-    for(const auto& ch : word)
+    for(unsigned i=0; i<word.size(); ++i)
     {
         right.push(left.pop());
     }
