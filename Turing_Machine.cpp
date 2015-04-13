@@ -13,6 +13,17 @@ Turing_Machine::Turing_Machine(std::istream& file)
         file >> final;
         final_states.insert(final);
     }
+    
+    //read transition table
+    std::string current, next;
+    char direction;
+    input read, write;
+    while(!file.eof())
+    {
+        //current read next write direction
+        file >> current >> read >> next >> write >> direction;
+        states[current][read] = std::make_tuple(next, write, (LEFT==direction));
+    }
 }
 
 bool Turing_Machine::accepts(const std::string& word)
