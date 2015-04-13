@@ -24,4 +24,18 @@ input Stack::pop()
     }
 }
 
+void Stack::print_from_bottom(std::ostream& out) const
+{
+    for(const auto& item: stack)
+    {
+        out<<item;
+    }
+}
 
+void Stack::print_from_top(std::ostream& out) const
+{
+    for(auto iter = stack.crbegin(); iter!=stack.crend(); ++iter)
+    {
+        out<<*iter;
+    }
+}

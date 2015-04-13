@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
     }
     Turing_Machine tm(file);
     file.close();
-    tm.accepts("Hello world!");
+    tm.accepts("000111");
     
     return 0;
 }

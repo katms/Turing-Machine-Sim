@@ -40,6 +40,34 @@ bool Turing_Machine::accepts(const std::string& word)
     
     //head reads the first symbol, now at the top of the right stack
     head = right.pop();
+    state_name current = start;
     
-    return false;
+    state_name next;
+    input write;
+    bool go_left;
+    
+    while(final_states.find(current)==final_states.end())
+    {
+        left.print_from_bottom();
+        std::cout<<current<<head;
+        right.print_from_top();
+        std::cout<<std::endl;
+        
+        std::tie(next, write, go_left) = states.at(current).at(head);
+        
+        current = next;
+        
+        if(go_left)
+        {
+            right.push(write);
+            head = left.pop();
+        }
+        else
+        {
+            left.push(write);
+            head = right.pop();
+        }
+    }
+    
+    return true;
 }
