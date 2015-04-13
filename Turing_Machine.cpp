@@ -1,4 +1,5 @@
 #include "Turing_Machine.h"
+#include <stdexcept> //out_of_range
 
 Turing_Machine::Turing_Machine(std::istream& file)
 {
@@ -48,15 +49,25 @@ bool Turing_Machine::accepts(const std::string& word)
     
     while(final_states.find(current)==final_states.end())
     {
+        //output status
         left.print_from_bottom();
         std::cout<<current<<head;
         right.print_from_top();
         std::cout<<std::endl;
         
-        std::tie(next, write, go_left) = states.at(current).at(head);
+        try
+        {
+            std::tie(next, write, go_left) = states.at(current).at(head);
+        }
         
+        //crash
+        catch (std::out_of_range)
+        {
+            return false;
+        }
+        
+        //transition
         current = next;
-        
         if(go_left)
         {
             right.push(write);
