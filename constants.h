@@ -6,12 +6,12 @@
 #include <tuple>
 #include <map>
 
-typedef char input;
+typedef char symbol;
 typedef std::string state_name;
-typedef std::tuple<state_name, input, bool> transition;
-typedef std::map<input, transition> state;
+typedef std::tuple<state_name, symbol, bool> transition;
+typedef std::map<symbol, transition> state;
 
-const input BLANK='\\';
+const symbol BLANK='\\';
 const char LEFT = 'L';
 const char RIGHT = 'R';
 

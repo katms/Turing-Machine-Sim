@@ -10,8 +10,8 @@ class Stack
 {
     public:
     	explicit Stack(const bool& reverse);
-        void push(const input& next);
-        input pop();
+        void push(const symbol& next);
+        symbol pop();
         
         friend std::ostream& operator<<(std::ostream& out, const Stack& s)
         {
@@ -33,7 +33,7 @@ class Stack
         }
 
     private:
-        std::list<input> stack;
+        std::list<symbol> stack;
         const bool PRINT_REVERSED;
 };
 

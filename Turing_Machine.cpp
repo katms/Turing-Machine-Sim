@@ -18,7 +18,7 @@ Turing_Machine::Turing_Machine(std::istream& file)
     //read transition table
     std::string current, next;
     char direction;
-    input read, write;
+    symbol read, write;
     while(!file.eof())
     {
         //current read next write direction
@@ -31,7 +31,7 @@ bool Turing_Machine::accepts(const std::string& word)
 {
     Stack left(false);
     Stack right(true);
-    input head;
+    symbol head;
     
     //push word on the right stack in reverse order
     for(auto itr = word.crbegin(); itr!=word.crend(); ++itr)
@@ -44,18 +44,14 @@ bool Turing_Machine::accepts(const std::string& word)
     state_name current = start;
     
     state_name next;
-    input write;
+    symbol write;
     bool go_left;
     
     while(final_states.find(current)==final_states.end())
     {
         //output status
         std::cout<<left<<current<<head<<right<<std::endl;
-/*        left.print_from_bottom();
-        std::cout<<current<<head;
-        right.print_from_top();
-        std::cout<<std::endl;
- */       
+               
         try
         {
             std::tie(next, write, go_left) = states.at(current).at(head);

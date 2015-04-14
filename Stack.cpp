@@ -3,7 +3,7 @@
 Stack::Stack(const bool& print_reversed):
     PRINT_REVERSED(print_reversed) {}
 
-void Stack::push(const input& next)
+void Stack::push(const symbol& next)
 {
     if(!(stack.empty() && BLANK==next))
     {
@@ -12,7 +12,7 @@ void Stack::push(const input& next)
 }
 
 
-input Stack::pop()
+symbol Stack::pop()
 {
     if(stack.empty())
     {
@@ -20,7 +20,7 @@ input Stack::pop()
     }
     else
     {
-        input last=std::move(stack.back());
+        symbol last=std::move(stack.back());
         stack.pop_back();
         return last;
     }

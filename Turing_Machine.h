@@ -10,7 +10,7 @@ public:
     explicit Turing_Machine(std::istream& file);
     bool accepts(const std::string& word);
 private:
-	//std::map<state_name, std::map<input, std::tuple(state_name, input, bool)>>
+	//std::map<state_name, std::map<symbol, std::tuple(state_name, symbol, bool)>>
     std::map<state_name, state> states;
     std::set<state_name> final_states;
     state_name start;
