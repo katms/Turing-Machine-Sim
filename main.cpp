@@ -1,11 +1,12 @@
 #include "constants.h"
 #include "Turing_Machine.h"
+#include "exceptions.h"
 
 int main(int argc, char* argv[])
 {
-    if(2!=argc)
+    if(2>argc)
     {
-        std::cout<<"Usage: tmsim <file>"<<std::endl;
+        std::cout<<"Usage: tmsim <file> [words]"<<std::endl;
         return 1;
     }
     std::ifstream file(argv[1]);
@@ -14,10 +15,22 @@ int main(int argc, char* argv[])
         std::cerr<<"Could not open "<<argv[1]<<std::endl;
         return 1;
     }
-    Turing_Machine tm(file);
-    file.close();
-    std::cout<<(tm.accepts("aaabb") ? "true" : "false")<<std::endl;
-    std::cout<<(tm.accepts("aaabbb") ? "true" : "false")<<std::endl;
+    try
+    {
+        Turing_Machine tm(file);
+        file.close();
     
+        for(int word=2; word<argc; ++word)
+        {
+            std::cout<<(tm.accepts(argv[word]) ? "true" : "false")<<"\n\n";
+        }
+    }
+    catch (TMSim_Exception& e)
+    {
+        std::cout<<e.what()<<std::endl;
+        file.close();
+        return 1;
+    }
+
     return 0;
 }

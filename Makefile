@@ -2,7 +2,7 @@ CXX := g++
 CXXFLAGS += -std=c++11 -Wall
 
 OBJECT_FILE = $(CXX) $^ $(CXXFLAGS) -c -o $@
-OBJECTS := main.o Stack.o Turing_Machine.o
+OBJECTS := main.o Stack.o Turing_Machine.o exceptions.o
 EXE := tmsim
 
 build: $(OBJECTS)
@@ -13,6 +13,9 @@ main.o: main.cpp
 
 Stack.o: Stack.cpp
 	$(OBJECT_FILE)
-
+	
 Turing_Machine.o: Turing_Machine.cpp
+	$(OBJECT_FILE)
+
+exceptions.o: exceptions.cpp
 	$(OBJECT_FILE)

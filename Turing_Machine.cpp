@@ -1,6 +1,7 @@
 #include "Turing_Machine.h"
 #include <stdexcept> //out_of_range
-
+#include "exceptions.h"
+#include <sstream>
 Turing_Machine::Turing_Machine(std::istream& file)
 {
     //read start state
@@ -14,20 +15,40 @@ Turing_Machine::Turing_Machine(std::istream& file)
         file >> final;
         final_states.insert(final);
     }
-    
-    //read transition table
+
     std::string current, next;
     char direction;
-    symbol read, write;
+    symbol read, write;  
+                  
+    //read transition table
     while(!file.eof())
     {
-        //current read next write direction
+
         file >> current >> read >> next >> write >> direction;
-        states[current][read] = std::make_tuple(next, write, (LEFT==direction));
+        
+        const transition tuple = std::make_tuple(next, write, (LEFT==direction));
+
+        //make sure this isn't getting overwritten
+        const auto on_current = states.find(current);
+        if(on_current!=states.end())
+        {
+            const auto transitions = on_current->second;
+            const auto on_read = transitions.find(read);
+            if(on_read!=transitions.end() && on_read->second != tuple) //ignore if duplicate
+            {
+                state_name first_next;
+                symbol first_write;
+                char first_direction = (std::get<2>(on_read->second)) ? LEFT:RIGHT;
+                std::tie(first_next, first_write, std::ignore) = on_read->second;
+                throw Multiple_Paths(current, read, first_next, first_write, first_direction, current, read, next, write, direction);
+            }
+        }
+        
+        states[current][read] = tuple;
     }
 }
 
-bool Turing_Machine::accepts(const std::string& word)
+bool Turing_Machine::accepts(const std::string& word) const
 {
     Stack left(false);
     Stack right(true);

@@ -8,7 +8,7 @@ class Turing_Machine
 {
 public:
     explicit Turing_Machine(std::istream& file);
-    bool accepts(const std::string& word);
+    bool accepts(const std::string& word) const;
 private:
 	//std::map<state_name, std::map<symbol, std::tuple(state_name, symbol, bool)>>
     std::map<state_name, state> states;

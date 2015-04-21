@@ -6,3 +6,6 @@ obj/
 *.cbp
 *.layout
 *.depend
+
+# for testing exceptions
+fail
